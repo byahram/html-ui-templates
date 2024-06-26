@@ -1,0 +1,22 @@
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    overflow-x: hidden;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-text);
+    color: var(--color-primary);
+    background-image: -webkit-repeating-radial-gradient(
+       center center,
+       var(--color-primary),
+       var(--color-primary) 1px,
+       var(--color-secondary) 1px,
+       var(--color-secondary) 100%
+    );
+    background-size: 8px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}

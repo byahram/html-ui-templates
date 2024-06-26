@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+@import url('../fonts/PPNeueWorld/PPNeueWorld.css');
+
+@import url('../fonts/Poppins/Poppins.css');
+
+@font-face {
+    font-family: 'Amalfi-Coast';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/Amalfi_Coast.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Chosunilbo_myungjo';
+    src: url('../fonts/ChosunilboNM_Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ghanachoco';
+    src: url('../fonts/Ghanachocolate.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KCC-eunyoung';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/KCC-eunyoung_Regular.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'stay-home';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/STAY_HOME.otf');
+    font-display: swap;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900');
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');

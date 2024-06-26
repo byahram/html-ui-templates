@@ -1,0 +1,207 @@
+/* 아이콘 공통 */
+/***
+  * <a href="" class="use_ico">ICON LABEL<i class="ico_comm ico12 line_arrow postfix"></i></a> 
+  */
+.use_ico {
+    display: flex;
+    align-items: center;
+}
+.ico_comm {
+    display: block;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: 0 0;
+}
+.ico_comm.prefix {
+    margin-right: 4px;
+}
+.ico_comm.postfix {
+    margin-left: 4px;
+}
+.ico_comm.ico10 {
+    width: 10px;
+    height: 10px;
+}
+.ico_comm.ico12 {
+    width: 12px;
+    height: 12px;
+}
+.ico_comm.ico16 {
+    width: 16px;
+    height: 16px;
+}
+.ico_comm.ico18 {
+    width: 18px;
+    height: 18px;
+}
+.ico_comm.ico24 {
+    width: 24px;
+    height: 24px;
+}
+.ico_comm.ico30 {
+    width: 30px;
+    height: 30px;
+}
+.ico_comm.ico32 {
+    width: 32px;
+    height: 32px;
+}
+.ico_comm.ico36 {
+    width: 36px;
+    height: 36px;
+}
+.ico_comm.ico48 {
+    width: 48px;
+    height: 48px;
+}
+
+.ico_comm.arrow_down_b {
+    background-image: url('../img/icon/ico_arrow_down_b.png');
+}
+.ico_comm.arrow_down_w {
+    background-image: url('../img/icon/ico_arrow_down_w.png');
+}
+.ico_comm.arrow_left_b {
+    background-image: url('../img/icon/ico_arrow_left_b.png');
+}
+.ico_comm.arrow_left_w {
+    background-image: url('../img/icon/ico_arrow_left_w.png');
+}
+.ico_comm.arrow_right_b {
+    background-image: url('../img/icon/ico_arrow_right_b.png');
+}
+.ico_comm.arrow_right_g {
+    background-image: url('../img/icon/ico_arrow_right_g.png');
+}
+.ico_comm.arrow_right_w {
+    background-image: url('../img/icon/ico_arrow_right_w.png');
+}
+.ico_comm.ask {
+    background-image: url('../img/icon/ico_askus.png');
+}
+.ico_comm.asterisk {
+    background-image: url('../img/icon/ico_asterisk.png');
+}
+.ico_comm.chat_b {
+    background-image: url('../img/icon/ico_chat_b.png');
+}
+.ico_comm.chat_w {
+    background-image: url('../img/icon/ico_chat_w.png');
+}
+.ico_comm.check_b {
+    background-image: url('../img/icon/ico_check_b.png');
+}
+.ico_comm.check_g {
+    background-image: url('../img/icon/ico_check_g.png');
+}
+.ico_comm.check_w {
+    background-image: url('../img/icon/ico_check_w.png');
+}
+.ico_comm.checked {
+    background-image: url('../img/icon/ico_checked.png');
+}
+.ico_comm.circle_error {
+    background-image: url('../img/icon/ico_circle_error.png');
+}
+.ico_comm.circle_o {
+    background-image: url('../img/icon/ico_circle_o.png');
+}
+.ico_comm.circle_x {
+    background-image: url('../img/icon/ico_circle_x.png');
+}
+.ico_comm.circle_y {
+    background-image: url('../img/icon/ico_circle_y.png');
+}
+.ico_comm.delete {
+    background-image: url('../img/icon/ico_delete.png');
+}
+.ico_comm.delete_b {
+    background-image: url('../img/icon/ico_delete_b.png');
+}
+.ico_comm.delete_g {
+    background-image: url('../img/icon/ico_delete_g.png');
+}
+.ico_comm.info_b {
+    background-image: url('../img/icon/ico_info_b.png');
+}
+.ico_comm.info_border {
+    background-image: url('../img/icon/ico_info_border.png');
+}
+.ico_comm.confirm {
+    background-image: url('../img/icon/ico_confirm.png');
+}
+.ico_comm.minus_b {
+    background-image: url('../img/icon/ico_minus_b.png');
+}
+.ico_comm.minus_w {
+    background-image: url('../img/icon/ico_minus_w.png');
+}
+.ico_comm.pw_hide_png {
+    background-image: url('../img/icon/ico_password_hide.png');
+}
+.ico_comm.pw_hide_svg {
+    background-image: url('../img/icon/ico_password_hide.svg');
+}
+.ico_comm.pw_view_png {
+    background-image: url('../img/icon/ico_password_view.png');
+}
+.ico_comm.pw_view_svg {
+    background-image: url('../img/icon/ico_password_view.png');
+}
+.ico_comm.plus_b {
+    background-image: url('../img/icon/ico_plus_b.png');
+}
+.ico_comm.plus_w {
+    background-image: url('../img/icon/ico_plus_w.png');
+}
+.ico_comm.radio {
+    background-image: url('../img/icon/ico_radio.png');
+}
+.ico_comm.radio_checked {
+    background-image: url('../img/icon/ico_radio_checked.png');
+}
+.ico_comm.refresh {
+    background-image: url('../img/icon/ico_refresh.png');
+}
+.ico_comm.search {
+    background-image: url('../img/icon/ico_search.png');
+}
+.ico_comm.send_b {
+    background-image: url('../img/icon/ico_send_b.png');
+}
+.ico_comm.share {
+    background-image: url('../img/icon/ico_share.png');
+}
+.ico_comm.totop {
+    background-image: url('../img/icon/ico_totop2.png');
+}
+.ico_comm.user {
+    background-image: url('../img/icon/ico_user.png');
+}
+.ico_comm.instagram_w {
+    background-image: url('../img/icon/sns_instagram.png');
+}
+.ico_comm.facebook_w {
+    background-image: url('../img/icon/sns_facebook.png');
+}
+.ico_comm.youtube_w {
+    background-image: url('../img/icon/sns_youtube.png');
+}
+.ico_comm.github_b {
+    background-image: url('../img/icon/sns_github.png');
+}
+.ico_comm.instagram_w {
+    background-image: url('../img/icon/ico_sns_instagram.png');
+    border: 0.5px solid #444;
+    border-radius: 50%;
+}
+.ico_comm.facebook_w {
+    background-image: url('../img/icon/ico_sns_facebook.png');
+    border: 0.5px solid #444;
+    border-radius: 50%;
+}
+.ico_comm.youtube_w {
+    background-image: url('../img/icon/ico_sns_youtube.png');
+    border: 0.5px solid #444;
+    border-radius: 50%;
+}
