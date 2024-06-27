@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Distortion Hover Effect | Codrops</title>
+	<meta name="description" content="A little library that can be used for creating WebGL powered distortion hover effects using displacement images." />
+	<meta name="keywords" content="webgl, hover, effect, distortion, displacement, web development, three.js" />
+	<meta name="author" content="Codrops" />
+
+    <link rel="stylesheet" href="../assets/css/common.css">
+
+	<style>
+		@import url("https://use.typekit.net/std3xut.css");
+		*,
+		*::after,
+		*::before {
+			box-sizing: border-box;
+		}
+		html {
+			background: #fff;
+		}
+		body {
+			--color-text: #000;
+			--color-bg: #fff;
+			--color-link: #000;
+			--color-link-hover: #000;
+			--color-info: #000;
+			font-family: "brother-1816",sans-serif;
+			min-height: 100vh;
+			color: #57585c;
+			color: var(--color-text);
+			background-color: #fff;
+			background-color: var(--color-bg);
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+		a {
+			text-decoration: none;
+			color: var(--color-link);
+			outline: none;
+		}
+		a:hover,
+		a:focus {
+			color: var(--color-link-hover);
+			outline: none;
+		}
+		.hidden {
+			position: absolute;
+			overflow: hidden;
+			width: 0;
+			height: 0;
+			pointer-events: none;
+		}
+		.message {
+			position: relative;
+			z-index: 100;
+			display: none;
+			padding: 1em;
+			text-align: center;
+			color: var(--color-bg);
+			background: var(--color-text);
+		}
+
+		main {
+			position: relative;
+			margin: 0 auto;
+		}
+		.grid__item {
+			position: relative;
+			display: flex;
+			align-items: stretch;
+			width: 100vw;
+		}
+		.grid__item--bg {
+			background-color: var(--item-bg);
+			height: 100vw;
+		}
+		.grid__item-content {
+			width: 100%;
+			padding: 8vw;
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
+			pointer-events: none;
+			background: var(--item-bg);
+		}
+		.grid__item--bg .grid__item-content {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			top: 0;
+			left: 0;
+		}
+		.grid__item-img {
+			display: block;
+			height: 100%;
+			width: 100%;
+		}
+		.grid__item-img canvas {
+			height: 100%;
+		}
+		.grid__item-img img {
+			height: 100%;
+			display: block;
+		}
+		.grid__item-img img:nth-child(2) {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
+		.grid__item:hover .grid__item-img img:nth-child(2) {
+			opacity: 1;
+		}
+		.js .grid__item-img img {
+			display: none;
+		}
+		.grid__item-title {
+			font-weight: 700;
+			font-size: 2.5rem;
+			line-height: 1;
+			margin: 2rem 0 0 0;
+			color: var(--item-title);
+		}
+		.grid__item-meta {
+			text-transform: uppercase;
+			font-weight: 400;
+			letter-spacing: 0.25rem;
+			font-size: 0.95rem;
+			color: var(--item-meta);
+		}
+		.grid__item-subtitle {
+			display: block;
+			margin: auto 0 0 0;
+			font-weight: 400;
+			font-size: 1.5em;
+			color: var(--item-subtitle);
+		}
+		.grid__item-subtitle span {
+			display: block;
+		}
+		.grid__item-link {
+			display: inline-block;
+			color: currentColor;
+			font-weight: 700;
+			font-size: 0.95rem;
+			position: relative;
+			padding: 0 0 0.2rem;
+			pointer-events: auto;
+			color: var(--item-link);
+		}
+		.grid__item-link:focus,
+		.grid__item-link:hover {
+			color: var(--item-link-hover);
+		}
+		.grid__item-link::before {
+			content: '';
+			position: absolute;
+			background: currentColor;
+			width: 80%;
+			height: 1px;
+			bottom: 0;
+			transform-origin: 0% 50%;
+			transform: scale3d(0,1,1);
+			opacity: 0;
+			transition: all 0.3s;
+			transition-property: opacity, transform;
+		}
+		.grid__item-link:hover::before {
+			opacity: 1;
+			transform: scale3d(1,1,1);
+		}
+		.grid__item-link + .grid__item-link {
+			margin: 0 0 0 3rem;
+		}
+		.grid__item-text + .grid__item-link {
+			white-space: nowrap;
+			margin-top: 1rem;
+			align-self: flex-start;
+			margin-top: auto;
+		}
+
+		/* Themes */
+		.theme-color {
+			--item-bg: rgba(0,0,0,0.2);
+			--item-link: #fff;
+			--item-link-hover: #fff;
+			--item-meta: #fff;
+			--item-title: #fff;
+			--item-subtitle: #fff;
+			--item-text: #fff;
+		}
+
+		@media screen and (min-width: 85em) {
+			.grid__item-text {
+				width: 80%;
+			}
+		}
+
+		@media screen and (min-width: 50em) {
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(2,50vmax);
+			}
+			.grid__item {
+				height: 50vmax;
+				width: 100%;
+			}
+			.grid__item-subtitle * {
+				opacity: 0;
+				transform: translate3d(100px, 0, 0);
+				transition: all 0.5s cubic-bezier(0.2, 1, 0.7, 1);
+				transition-property: transform, opacity;
+			}
+			.grid__item:hover .grid__item-subtitle * {
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+			}
+			.grid__item:hover .grid__item-subtitle span {
+				transition-delay: 0.1s;
+			}
+			.grid__item:hover .grid__item-subtitle .grid__item-link {
+				transition-delay: 0s;
+			}
+			.grid__item-title {
+				font-size: 6vw;
+			}
+			.grid__item-title--small {
+				font-size: 3vw;
+			}
+			.grid__item-text {
+				margin-top: 2.5rem;
+			}
+		}
+	</style>
+
+	<script>
+		document.documentElement.className="js";
+		var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};
+		supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");
+	</script>
+</head>
+<body class="loading">
+	<main>
+		<div class="message">Some message for mobile if needed.</div>
+		<div class="grid">
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/8.jpg" data-intensity="-0.65" data-speedIn="1.2" data-speedOut="1.2">
+					<img src="../assets/imgs/hover/image22.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image21.jpg" alt="Image"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">California</span>
+					<h2 class="grid__item-title">Jumping Around</h2>
+					<h3 class="grid__item-subtitle">
+						<span>California's last empty jump spots</span>
+						<a class="grid__item-link" href="#">Discover more</a>
+					</h3>
+				</div>
+			</div>
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/4.png" data-intensity="0.2" data-speedIn="1.6" data-speedOut="1.6">
+					<img src="../assets/imgs/hover/image23.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image24.jpg" alt="Image"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">Italy</span>
+					<h2 class="grid__item-title">Calm Serenity</h2>
+					<h3 class="grid__item-subtitle">
+						<span>Italy's secret meadows and fields</span>
+						<a class="grid__item-link" href="#">Check them out</a>
+					</h3>
+				</div>
+			</div>
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/1.jpg" data-intensity="-0.4" data-speedIn="0.7" data-speedOut="0.3" data-easing="Sine.easeOut">
+					<img src="../assets/imgs/hover/image1.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image13.jpg" alt="Image Alt"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">Sweden</span>
+					<h2 class="grid__item-title">Build it forever</h2>
+					<h3 class="grid__item-subtitle">
+						<span>Sweden's famous furniture</span>
+						<a class="grid__item-link" href="#">Discover more</a>
+					</h3>
+				</div>
+			</div>
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/7.jpg" data-intensity="0.9" data-speedIn="0.8" data-speedOut="0.4" data-easing="Circ.easeOut">
+					<img src="../assets/imgs/hover/image19.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image20.jpg" alt="Image Alt"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">Spain</span>
+					<h2 class="grid__item-title">Water Wonders</h2>
+					<h3 class="grid__item-subtitle">
+						<span>Spain's amazingly colorful lakes</span>
+						<a class="grid__item-link" href="#">Check them out</a>
+					</h3>
+				</div>
+			</div>
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/10.jpg" data-intensity="0.7" data-speedIn="1" data-speedOut="0.5" data-easing="Power2.easeOut">
+					<img src="../assets/imgs/hover/image2.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image3.jpg" alt="Image Alt"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">Germany</span>
+					<h2 class="grid__item-title">Holy House</h2>
+					<h3 class="grid__item-subtitle">
+						<span>Germany's amazing architecture</span>
+						<a class="grid__item-link" href="#">Check it out</a>
+					</h3>
+				</div>
+			</div>
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/6.jpg" data-intensity="0.6" data-speedIn="1.2" data-speedOut="0.5">
+					<img src="../assets/imgs/hover/image5.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image4.jpg" alt="Image Alt"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">Denmark</span>
+					<h2 class="grid__item-title">Future Proof</h2>
+					<h3 class="grid__item-subtitle">
+						<span>Building for the future</span>
+						<a class="grid__item-link" href="#">Learn more</a>
+					</h3>
+				</div>
+			</div>
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/11.jpg" data-intensity="0.4" data-speedIn="1" data-speedOut="1">
+					<img src="../assets/imgs/hover/image10.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image6.jpg" alt="Image Alt"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">Florida</span>
+					<h2 class="grid__item-title">Cool and Fresh</h2>
+					<h3 class="grid__item-subtitle">
+						<span>Discover Florida's best beaches</span>
+						<a class="grid__item-link" href="#">Check them out</a>
+					</h3>
+				</div>
+			</div>
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/2.jpg" data-intensity="0.6" data-speedIn="1" data-speedOut="1">
+					<img src="../assets/imgs/hover/image11.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image18.jpg" alt="Image Alt"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">Europe</span>
+					<h2 class="grid__item-title">My Cup of Coffee</h2>
+					<h3 class="grid__item-subtitle">
+						<span>The best coffe houses in Europe</span>
+						<a class="grid__item-link" href="#">Check them out</a>
+					</h3>
+				</div>
+			</div>
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/15.jpg" data-intensity="-0.1" data-speedIn="0.4" data-speedOut="0.4" data-easing="power2.easeInOut">
+					<img src="../assets/imgs/hover/image7.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image14.jpg" alt="Image Alt"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">Bulgaria</span>
+					<h2 class="grid__item-title">Doors and Rooftops</h2>
+					<h3 class="grid__item-subtitle">
+						<span>Experience fantastic buildings</span>
+						<a class="grid__item-link" href="#">Check them out</a>
+					</h3>
+				</div>
+			</div>
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/13.jpg" data-intensity="0.2">
+					<img src="../assets/imgs/hover/image8.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image15.jpg" alt="Image Alt"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">France</span>
+					<h2 class="grid__item-title">French Geometry</h2>
+					<h3 class="grid__item-subtitle">
+						<span>France's geometric wonders</span>
+						<a class="grid__item-link" href="#">Check them out</a>
+					</h3>
+				</div>
+			</div>
+			<div class="grid__item grid__item--bg theme-color">
+				<div class="grid__item-img" data-displacement="../assets/imgs/displacement/8.jpg" data-intensity="-0.8">
+					<img src="../assets/imgs/hover/image26.jpg" alt="Image"/>
+					<img src="../assets/imgs/hover/image25.jpg" alt="Image Alt"/>
+				</div>
+				<div class="grid__item-content">
+					<span class="grid__item-meta">Dublin</span>
+					<h2 class="grid__item-title">Facades and Bikes</h2>
+					<h3 class="grid__item-subtitle">
+						<span>The parking habits of the Irish</span>
+						<a class="grid__item-link" href="#">Read more</a>
+					</h3>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<script src="../assets/js/imagesloaded.pkgd.min.js"></script>
+	<script src="../assets/js/three.min.js"></script>
+	<script src="../assets/js/gsap.min.js"></script>
+	<script src="../assets/js/hover-effect.umd.js"></script>
+	<script>
+		imagesLoaded( document.querySelectorAll('img'), () => {
+			document.body.classList.remove('loading');
+		});
+
+		Array.from(document.querySelectorAll('.grid__item-img')).forEach((el) => {
+			const imgs = Array.from(el.querySelectorAll('img'));
+			new hoverEffect({
+				parent: el,
+				intensity: el.dataset.intensity || undefined,
+				speedIn: el.dataset.speedin || undefined,
+				speedOut: el.dataset.speedout || undefined,
+				easing: el.dataset.easing || undefined,
+				hover: el.dataset.hover || undefined,
+				image1: imgs[0].getAttribute('src'),
+				image2: imgs[1].getAttribute('src'),
+				displacementImage: el.dataset.displacement
+			});
+		});
+	</script>
+</body>
+</html>

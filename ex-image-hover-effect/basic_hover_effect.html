@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #0F2027;
+            background: linear-gradient(120deg, #2C5364, #203A43, #0F2027);
+            font-family: 'Jua', sans-serif;
+        }
+
+        /* wrap 1 */
+        .hover_wrap1 {
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+        .hover_wrap1 figure {
+            position: relative;
+            width: 400px; margin:30px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .hover_wrap1 figure img {
+            width: 100%; display: block;
+        }
+        .hover_wrap1 figcaption {
+            position: absolute; left: 0; bottom: 0; 
+            background: rgba(0,0,0,0.44);
+            color: #fff; 
+            width: 100%; padding: 20px ;
+            box-sizing: border-box;
+        }
+        .hover_wrap1 figcaption h3 {
+            font-size: 20px; padding-bottom: 10px; margin: 0;
+        }
+        .hover_wrap1 figcaption p {
+            font-size: 16px; margin: 0;
+        }
+        /* wrap 1: hover effect 1 */
+        .hover_wrap1 figure.hover1 figcaption {
+            opacity: 0;
+            transition: opacity 0.33s ease-in-out;
+        }
+        .hover_wrap1 figure.hover1:hover figcaption {
+            opacity: 1;
+        }
+        /* wrap 1: hover effect 2 */
+        .hover_wrap1 figure.hover2 figcaption {
+            opacity: 0;
+            bottom: -60px;
+            transition: 
+                opacity 0.33s ease-in-out,
+                bottom 0.33s ease;
+        }
+        .hover_wrap1 figure.hover2:hover figcaption {
+            opacity: 1;
+            bottom: 0;
+        }
+
+        /* wrap 2 */
+        .hover_wrap2 {
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+        .hover_wrap2 figure {
+            position: relative;
+            width: 400px; margin:30px;
+            cursor: pointer;
+            overflow: hidden;
+            background: linear-gradient(45deg, #874da2, #c43a30);
+        }
+        .hover_wrap2 figure img {
+            width: 100%; 
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .hover_wrap2 figure::before {
+            content:'';
+            width: 60px; height: 1px; background: #fff;
+            position: absolute; left: 100%; top: 50%; z-index:1;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+        .hover_wrap2 figure::after {
+            content:'';
+            width: 1px; height: 60px; background: #fff;
+            position: absolute; left: 50%; top: 0; z-index:1;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+        /* wrap 2: hover effect 3 */
+        .hover_wrap2 figure.hover3:hover img {opacity: 0.6;}
+        .hover_wrap2 figure.hover3:hover::before {
+            left: 50%; opacity: 1;
+        }
+        .hover_wrap2 figure.hover3:hover::after {
+            top:50%; opacity: 1;
+        }
+        /* wrap 2: hover effect 4 */
+        .hover_hover_wrap2wrap figure.hover4::before {left: 0%;}
+        .hover_wrap2 figure.hover4::after {top: 100%;}
+        .hover_wrap2 figure.hover4:hover img {opacity: 0.6;}
+        .hover_wrap2 figure.hover4:hover::before {
+            left: 50%; top: 50%; opacity: 1;
+        }
+        .hover_wrap2 figure.hover4:hover::after {
+            left: 50%; top: 50%; opacity: 1;
+        }
+
+        /* wrap 3 */
+        .hover_wrap3 {
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+        .hover_wrap3 figure {
+            position: relative;
+            width: 400px; margin: 30px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .hover_wrap3 figure img {
+            width: 100%; 
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .hover_wrap3 figure {
+            background: #fff;
+        }
+        .hover_wrap3 figure:hover img {
+            opacity: 0.1;
+        }
+        .hover_wrap3 figcaption {
+            position: absolute;
+            top: 0; right: 0; left: 0; bottom: 0;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+        .hover_wrap3 figcaption::before {
+            content:'';
+            width: 150px; height: 150px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        .hover_wrap3 figcaption strong {
+            color: #fff;
+            z-index: 20;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        /* wrap 3: hover effect 5 */
+        .hover_wrap3 .hover5 figcaption {
+            transform: translatex(80%) rotate(180deg);
+            transition: all 0.3s ease;
+        }
+        .hover_wrap3 .hover5:hover figcaption {
+            transform: translatex(0%) rotate(0deg);
+        }
+        /* wrap 3: hover effect 6 */
+        .hover_wrap3 .hover6 figcaption {
+            transform: translatex(-80%) rotate(-180deg);
+            transition: all 0.3s ease;
+        }
+        .hover_wrap3 .hover6:hover figcaption {
+            transform: translatex(0%) rotate(0deg);
+        }
+
+        /* wrap 4 */
+        .hover_wrap4 {
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+        .hover_wrap4 .effect {
+            position: relative;
+            width: 400px; height: 300px; margin: 30px;
+        }
+        .hover_wrap4 .effect .front {
+            position: absolute; 
+            left: 0; top: 0; 
+            z-index: 10;
+            margin: 0
+        }
+        .hover_wrap4 .effect .back {
+            position: absolute; 
+            left: 0; top: 0;
+            margin: 0
+        }
+        .hover_wrap4 .effect figcaption {
+            position: absolute; bottom: 0; left: 0;
+            background: rgba(0,0,0,0.5);
+            width: 100%; padding: 3% 4%;
+            box-sizing: border-box;
+            color: #fff;
+        }
+        .hover_wrap4 .effect figcaption h3 {
+            font-size: 24px; padding-bottom: 5px; margin: 0;
+        }
+        .hover_wrap4 .effect figcaption p {
+            font-size: 20px; margin: 0;
+        }
+        .hover_wrap4 .effect img {
+            width: 100%; display: block;
+        }
+        /* wrap 4: hover effect 7 */
+        .hover_wrap4 .effect.hover7 .front {
+            transform: rotatey(0deg);
+            transition: transform 1s;
+            backface-visibility: hidden;
+        }
+        .hover_wrap4 .effect.hover7:hover .front {
+            transform: rotatey(180deg);
+        }
+        .hover_wrap4 .effect.hover7 .back {
+            transform: rotatey(-180deg);
+            transition: transform 1s;
+        }
+        .hover_wrap4 .effect.hover7:hover .back {
+            transform: rotatey(0deg);
+        }
+        /* wrap 4: hover effect 8 */
+        .hover_wrap4 .effect.hover8 .front {
+            transform: rotatex(0deg);
+            transition: transform 1s;
+            backface-visibility: hidden;
+        }
+        .hover_wrap4 .effect.hover8:hover .front {
+            transform: rotatex(180deg);
+        }
+        .hover_wrap4 .effect.hover8 .back {
+            transform: rotatex(-180deg);
+            transition: transform 1s;
+        }
+        .hover_wrap4 .effect.hover8:hover .back {
+            transform: rotatex(0deg);
+        }
+
+        /* wrap 5 */
+        .hover_wrap5 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hover_wrap5 .effect {
+            position: relative;
+            width: 400px; height: 300px; margin: 30px;
+            perspective: 1000px;
+        }
+        .hover_wrap5 .effect .front {
+            position: absolute; 
+            left: 0; top: 0; 
+            z-index: 10;
+            transform-style: preserve-3d;
+            margin: 0
+        }
+        .hover_wrap5 .effect .back {
+            position: absolute; 
+            left: 0; top: 0;
+            transform-style: preserve-3d;
+            margin: 0
+        }
+        .hover_wrap5 .effect img {
+            width: 100%; display: block;
+        }
+        .hover_wrap5 .effect figcaption {
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%) translatez(100px);
+            background: rgba(0,0,0,0.5);
+            text-align: center;
+            backface-visibility: hidden;
+            color: #fff;
+            padding: 3% 4%;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+        .hover_wrap5 .effect figcaption h3 {
+            font-size: 30px; 
+            padding-bottom: 10px;
+            margin: 0;
+        }
+        .hover_wrap5 .effect figcaption p {
+            font-size: 16px;
+            margin: 0;
+        }
+        /* wrap 5: hover effect 9 */
+        .hover_wrap5 .effect.hover9 .front {
+            transform: rotatey(0deg);
+            transition: transform 1s;
+            backface-visibility: hidden;
+        }
+        .hover_wrap5 .effect.hover9:hover .front {
+            transform: rotatey(180deg);
+        }
+        .hover_wrap5 .effect.hover9 .back {
+            transform: rotatey(-180deg);
+            transition: transform 1s;
+            backface-visibility: hidden;
+        }
+        .hover_wrap5 .effect.hover9:hover .back {
+            transform: rotatey(0deg);
+        }
+        /* wrap 5: hover effect 10 */
+        .hover_wrap5 .effect.hover10 .front {
+            transform: rotatex(0deg);
+            transition: transform 1s;
+            backface-visibility: hidden;
+        }
+        .hover_wrap5 .effect.hover10:hover .front {
+            transform: rotatex(180deg);
+        }
+        .hover_wrap5 .effect.hover10 .back {
+            transform: rotatex(-180deg);
+            transition: transform 1s;
+            backface-visibility: hidden;
+        }
+        .hover_wrap5 .effect.hover10:hover .back {
+            transform: rotatex(0deg);
+        }
+    </style>
+    
+</head> 
+<body>
+    <div class="hover_wrap1">
+        <figure class="hover1">
+            <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover19.jpg" alt="">
+            <figcaption>
+                <h3>Mouse Hover</h3>
+                <p>마우스 오버 효과입니다.</p>
+            </figcaption>
+        </figure>
+        <figure class="hover2">
+            <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover18.jpg" alt="">
+            <figcaption>
+                <h3>Mouse Hover</h3>
+                <p>마우스 오버 효과입니다.</p>
+            </figcaption>
+        </figure>
+    </div>
+
+   
+    <div class="hover_wrap2">
+        <figure class="hover3">
+            <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover17.jpg" alt="">
+        </figure>
+        <figure class="hover4">
+            <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover14.jpg" alt="">
+        </figure>
+    </div>
+
+    <div class="hover_wrap3">
+        <figure class="hover5">
+            <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover01.jpg" alt="">
+            <figcaption>
+                <strong>mouse hover</strong>
+            </figcaption>
+        </figure>
+        <figure class="hover6">
+            <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover02.jpg" alt="">
+            <figcaption>
+                <strong>mouse hover</strong>
+            </figcaption>
+        </figure>
+    </div>
+
+    <div class="hover_wrap4">
+        <div class="effect hover7">
+            <figure class="front">
+                <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover03.jpg" alt="앞면 이미지">
+                <figcaption>
+                    <h3>Mouse Hover</h3>
+                    <p>마우스 오버 이펙트 앞면입니다.</p>
+                </figcaption>
+            </figure>
+            <figure class="back">
+                <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover04.jpg" alt="뒷면 이미지">
+                <figcaption>
+                    <h3>Mouse Hover</h3>
+                    <p>마우스 오버 이펙트 뒷면입니다.</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="effect hover8">
+            <figure class="front">
+                <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover04.jpg" alt="앞면 이미지">
+                <figcaption>
+                    <h3>Mouse Hover</h3>
+                    <p>마우스 오버 이펙트 앞면입니다.</p>
+                </figcaption>
+            </figure>
+            <figure class="back">
+                <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover03.jpg" alt="뒷면 이미지">
+                <figcaption>
+                    <h3>Mouse Hover</h3>
+                    <p>마우스 오버 이펙트 뒷면입니다.</p>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+
+   <div class="hover_wrap5">
+        <div class="effect hover9">
+            <figure class="front">
+                <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover05.jpg" alt="앞면 이미지">
+                <figcaption>
+                    <h3>Mouse Hover</h3>
+                    <p>마우스 오버 이펙트 앞면입니다.</p>
+                </figcaption>
+            </figure>
+            <figure class="back">
+                <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover06.jpg" alt="뒷면 이미지">
+            <figcaption>
+                <h3>Mouse Hover</h3>
+                <p>마우스 오버 이펙트 뒷면입니다.</p>
+            </figcaption>
+            </figure>
+        </div>
+        <div class="effect hover10">
+            <figure class="front">
+                <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover06.jpg" alt="앞면 이미지">
+                <figcaption>
+                    <h3>Mouse Hover</h3>
+                    <p>마우스 오버 이펙트 앞면입니다.</p>
+                </figcaption>
+            </figure>
+            <figure class="back">
+                <img src="https://tistory2.daumcdn.net/tistory/2933724/skin/images/hover05.jpg" alt="뒷면 이미지">
+                <figcaption>
+                    <h3>Mouse Hover</h3>
+                    <p>마우스 오버 이펙트 뒷면입니다.</p>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <!-- <script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+    </script> -->
+</body>
+</html>
